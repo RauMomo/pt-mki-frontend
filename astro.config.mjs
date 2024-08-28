@@ -1,5 +1,4 @@
 import tailwind from "@astrojs/tailwind";
-import pagefind from "astro-pagefind";
 import { defineConfig } from "astro/config";
 import { configDotenv } from "dotenv";
 
@@ -18,11 +17,11 @@ export default defineConfig({
   },
   trailingSlash: "never",
   integrations: [
-    pagefind(),
     tailwind({
       applyBaseStyles: true,
     }),
     react({
+      include: ["**/react/*"],
       experimentalReactChildren: true,
     }),
   ],
