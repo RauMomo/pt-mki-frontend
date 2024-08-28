@@ -52,27 +52,27 @@
 		},
 		{
 			"src": "^\\/consulting$",
-			"dest": "_render"
+			"dest": "/_isr?x_astro_path=$0"
 		},
 		{
 			"src": "^\\/contact-us$",
-			"dest": "_render"
+			"dest": "/_isr?x_astro_path=$0"
 		},
 		{
 			"src": "^\\/our-team$",
-			"dest": "_render"
+			"dest": "/_isr?x_astro_path=$0"
 		},
 		{
 			"src": "^\\/public-training\\/([^/]+?)$",
-			"dest": "_render"
+			"dest": "/_isr?x_astro_path=$0"
 		},
 		{
 			"src": "^\\/training\\/([^/]+?)$",
-			"dest": "_render"
+			"dest": "/_isr?x_astro_path=$0"
 		},
 		{
 			"src": "^\\/$",
-			"dest": "_render"
+			"dest": "/_isr?x_astro_path=$0"
 		}
 	]
 }
