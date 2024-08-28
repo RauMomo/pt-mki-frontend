@@ -3,5 +3,7 @@
     "api/**/*.js": {
       "runtime": "nodejs18.x"
     }
-  }
+  },
+  "builds": [{ "src": "package.json", "use": "@vercel/static-build" }],
+  "routes": [{ "src": "/(.*)", "dest": "/" }]
 }
