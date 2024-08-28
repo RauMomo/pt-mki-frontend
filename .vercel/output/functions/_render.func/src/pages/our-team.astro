@@ -1,0 +1,93 @@
+---
+import Breadcrumb from "../components/Breadcrumb.astro";
+import ProfileItem from "../components/ProfileItem";
+import { apiConfig } from "../config/api";
+import Layout from "../layouts/Layout.astro";
+import type { FacilitatorProfile } from "./training/[id].astro";
+
+const customCrumbs = [
+  {
+    text: "Home",
+    href: "#",
+  },
+  {
+    text: "Our Team",
+    href: "/our-team",
+    title: "Our Team",
+  },
+];
+
+async function fetchProfiles(){
+  const response = await fetch(`${apiConfig.baseUrl}/profiles?populate[image]=*&pagination[pageSize]=7`, {
+    headers: {
+      Authorization: `Bearer ${apiConfig.lifetimeToken}`,
+      'Content-Type': `application/json; charset=utf`,
+    }
+  })
+
+  const json = await response.json();
+
+  return json.data;
+}
+
+var profileRawData = await fetchProfiles()
+var profiles : FacilitatorProfile[] = profileRawData.map((value : any) => {
+  var imageUrl = `${apiConfig.fileBaseUrl}${value.attributes.image.data.attributes.formats.small.url}`
+  var largeImageUrl = `${apiConfig.fileBaseUrl}${value.attributes.image.data.attributes.url}`
+
+  var facilitator : FacilitatorProfile = {
+    name: value.attributes.name,
+    description: value.attributes.description,
+    role: value.attributes.role,
+    image: imageUrl,
+    largeImage: largeImageUrl
+  }
+
+  return facilitator
+})
+
+---
+
+<Layout title="Our Team">
+  <div class="flex flex-col flex-1">
+    <div class="bg-bannerOt h-[360px] bg-cover bg-center flex items-center">
+      <section>
+        <div class="flex flex-col justify-center mt-auto mb-auto gap-8">
+          <h2 class="text-white tracking-wide font-normal text-4xl">Our Team</h2>
+          <Breadcrumb customCrumbs={customCrumbs}></Breadcrumb>
+        </div>
+      </section>
+    </div>
+    <div class="bg-white my-8 mx-8">
+      <div class="grid grid-cols-1 gap-4">
+        <!-- First row with 1 column -->
+        <div class="col-span-1 content-center mx-auto">
+          <div class="m-8 place-content-center place-items-center">
+            <ProfileItem client:load data={profiles[0]} />
+          </div>
+        </div>
+
+        <!-- Second row with 3 columns -->
+        <div class="grid grid-cols-3 gap-4">
+          {profiles.slice(1, 4).map((value) => {
+            return (
+              <div class="m-8 place-content-center place-items-center">
+                <ProfileItem client:load data={value} />
+              </div> 
+            )
+          })}
+        </div>
+
+        <!-- Third row with 3 columns -->
+        <div class="grid grid-cols-3 gap-4">
+          {profiles.slice(4, 7).map((value) => {
+            return (
+              <div class="m-8 place-content-center place-items-center">
+                <ProfileItem client:load data={value} />
+              </div> 
+            )
+          })}
+        </div>
+      </div>
+  </div>
+</Layout>

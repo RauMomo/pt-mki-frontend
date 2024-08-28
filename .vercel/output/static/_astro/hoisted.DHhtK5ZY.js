@@ -1,0 +1,1 @@
+import{s as n}from"./HomeStore.C638iTx1.js";import"./hoisted.CeyVNKL7.js";var e=document.getElementById("searchInput"),r=document.getElementById("search"),a=e?.value;function u(){a=e?.value}e?.addEventListener("input",()=>{u(),console.log(a)});r?.addEventListener("click",()=>{const t=e?.value;n.set(t),new URLSearchParams(window.location.search).set("query",t||"")});

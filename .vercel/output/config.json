@@ -1,0 +1,78 @@
+{
+	"version": 3,
+	"routes": [
+		{
+			"src": "/consulting/",
+			"headers": {
+				"Location": "/consulting"
+			},
+			"status": 308
+		},
+		{
+			"src": "/contact-us/",
+			"headers": {
+				"Location": "/contact-us"
+			},
+			"status": 308
+		},
+		{
+			"src": "/our-team/",
+			"headers": {
+				"Location": "/our-team"
+			},
+			"status": 308
+		},
+		{
+			"src": "/public-training/([^/]+?)/",
+			"headers": {
+				"Location": "/public-training/$1"
+			},
+			"status": 308
+		},
+		{
+			"src": "/training/([^/]+?)/",
+			"headers": {
+				"Location": "/training/$1"
+			},
+			"status": 308
+		},
+		{
+			"src": "^/_astro/(.*)$",
+			"headers": {
+				"cache-control": "public, max-age=31536000, immutable"
+			},
+			"continue": true
+		},
+		{
+			"handle": "filesystem"
+		},
+		{
+			"src": "^\\/_image$",
+			"dest": "_render"
+		},
+		{
+			"src": "^\\/consulting$",
+			"dest": "_render"
+		},
+		{
+			"src": "^\\/contact-us$",
+			"dest": "_render"
+		},
+		{
+			"src": "^\\/our-team$",
+			"dest": "_render"
+		},
+		{
+			"src": "^\\/public-training\\/([^/]+?)$",
+			"dest": "_render"
+		},
+		{
+			"src": "^\\/training\\/([^/]+?)$",
+			"dest": "_render"
+		},
+		{
+			"src": "^\\/$",
+			"dest": "_render"
+		}
+	]
+}

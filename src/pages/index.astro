@@ -4,7 +4,7 @@ import Background from "../components/Background.astro";
 import Banner from "../components/Banner.astro";
 import Customers from "../components/Customers.astro";
 import Gallery from "../components/Gallery.astro";
-import Services from "../components/Services.astro";
+import Service from "../components/Service.astro";
 import VisionMission from "../components/VisionMission.astro";
 import Layout from "../layouts/Layout.astro";
 
@@ -16,9 +16,9 @@ import Layout from "../layouts/Layout.astro";
     <VisionMission />
     <Background />
     <AboutUs />
-    <Services client:load />
+    <Service />
     <Customers />
-    <Gallery client:load/>
+    <Gallery/>
   </main>
 </Layout>
 

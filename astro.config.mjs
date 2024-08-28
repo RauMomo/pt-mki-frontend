@@ -12,6 +12,10 @@ configDotenv();
 export default defineConfig({
   output: "server",
   adapter: vercel(),
+  server: {
+    host: "0.0.0.0",
+    port: parseInt(process.env.PORT, 10) || 3000,
+  },
   trailingSlash: "never",
   integrations: [
     pagefind(),
