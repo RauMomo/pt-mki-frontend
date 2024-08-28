@@ -6,7 +6,7 @@ import Chip from "./Chip.astro";
 
 <section>
   <div class="flex flex-col gap-8 h-full py-16 px-16 justify-center items-center">
-    <Chip client:load title={"Person in Company"} fontSize={10}></Chip>
+    <Chip title={"Person in Company"} fontSize={10}></Chip>
     <h1 class="font-semibold text-3xl">Founder and Director</h1>
     <div class="flex flex-row gap-12 items-start mt-8">
       <Image src={ceoImg} width={350} height={50} alt="Pak Syahmuharnis" densities={[1.5, 2]} loading="lazy"/>

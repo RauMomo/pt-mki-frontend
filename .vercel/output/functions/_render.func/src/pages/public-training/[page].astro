@@ -1,0 +1,206 @@
+---
+import type { PaginateFunction } from "astro";
+import Breadcrumb from "../../components/Breadcrumb.astro";
+import Pagination from "../../components/Pagination.astro";
+import TrainingCard from "../../components/TrainingCard.astro";
+import type { TrainingItem } from "../../components/TrainingList.astro";
+import { apiConfig } from "../../config/api";
+import Layout from "../../layouts/Layout.astro";
+import { searchParams } from "../../store/HomeStore";
+import { Search } from "../../components/Search";
+
+const title = 'Public Training'
+
+// export const prerender = true;
+
+export async function getStaticPaths({ paginate }: { paginate: PaginateFunction }) {
+  const response = await fetch(`${apiConfig.baseUrl}/trainings?pagination[pageSize]=1`, {
+    headers: {
+      Authorization: `Bearer ${apiConfig.lifetimeToken}`,
+      'Content-Type': 'application/json',
+    },
+    method: 'GET',
+  });
+
+  const json = await response.json();
+  
+  const totalItems = json.meta.pagination.total;
+  const pageSize = 10;
+  const totalPages = Math.ceil(totalItems / pageSize);
+
+  const paths = Array.from({ length: totalPages }, (_, i) => ({
+    params: { page: (i + 1).toString(), totalPage: json.meta.pagination.pageCount},
+  }));
+
+  return paths;
+}
+
+export async function get({ params }: { params: { page: string, query: string},}) {
+  const currPage = params.page ? parseInt(params.page, 10) : 1;
+  const localQuery = params.query;
+  const searchQuery = localQuery ?? '';
+
+  const extraParams = searchQuery!.length > 0 ? `&filters[title][$contains]=${searchQuery}` : ''
+  const response = await fetch(`${apiConfig.baseUrl}/trainings?populate=image&pagination[page]=${currPage}&pagination[pageSize]=10${extraParams}`, {
+    headers: {
+      Authorization: `Bearer ${apiConfig.lifetimeToken}`,
+      'Content-Type': 'application/json',
+    },
+    method: 'GET',  
+  });
+
+  console.log('response' + response.status )
+  console.log('responseUrl' + response.url)
+
+  const json = await response.json();
+
+  const meta = json.meta
+  const totalPage = meta.pagination.pageCount
+  const currentUrl = `${currPage}`
+  const prevUrl = currPage - 1 === 0 ? '' : `${currPage - 1}`
+  const nextUrl = currPage + 1 > totalPage ? '' : `${currPage + 1}`
+  const firstUrl = `1`
+  const lastUrl = `${totalPage}`
+  const baseUrl = ``
+
+  const jsonTrainingList = json.data.map((value: any) => {
+    const attr = value.attributes;
+    const imgUrl = attr.image.data.attributes.formats.small.url;
+    return {
+      id: value.id,
+      title: attr.title,
+      description: attr.description,
+      category: attr.category,
+      image: imgUrl,
+      is_online: true,
+      date_list: attr.date.all,
+      price: {
+        price_online: attr.price?.online ?? 0,
+        price_offline: attr.price?.offline ?? 0,
+        discount: 0,
+      },
+    };
+  });
+
+  return {
+    props: {
+      jsonTrainingList,
+      currPage,
+      totalPage,
+      currentUrl,
+      prevUrl,
+      nextUrl,
+      firstUrl,
+      lastUrl,
+      baseUrl
+    },
+  };
+}
+
+var {page} = Astro.params
+var url = Astro.request.url
+var params = url.substring(url.indexOf('=') + 1, url.length)
+
+var result = await get({params: {
+  page: page,
+  query: params
+},})
+
+const allTrainingList: TrainingItem[] = result.props.jsonTrainingList
+
+const {
+  currPage,
+  totalPage,
+  currentUrl,
+  prevUrl,
+  nextUrl,
+  firstUrl,
+  lastUrl,
+  baseUrl
+} = result.props
+
+const customCrumbs = [
+  {
+    text: "Home",
+    href: "#",
+  },
+  {
+    text: "Public Training",
+    href: "#",
+    title: "Public Training",
+  },
+];
+---
+<Layout title="Public Training">
+  <div class="flex flex-col flex-1">
+    <div class="bg-black bg-cover py-16">
+      <section>
+        <div class="flex flex-col gap-8 flex-auto">
+          <div class="w-3/5 flex flex-col p-8 justify-start items-start gap-16">
+            <h1 class="flex-grow flex items-center justify-center text-white">Public Training</h1>
+            <Breadcrumb customCrumbs={customCrumbs}>
+          </div>
+        </div>
+      </section>
+    </div>
+    <div class="py-8">
+      <section>
+        <div class="flex flex-col flex-1 gap-4">
+          <div class="flex flex-row justify-start items-center">
+            <div class="mr-8">Cari Public Training di sini</div>
+            <Search client:load/>
+          </div>
+          <div class="grid grid-cols-4 gap-4 grid-rows-1 grid-flow-row">
+              {allTrainingList.map(training => {
+                console.log(training)
+                return (
+                  <div class="m-2">
+                    <TrainingCard title={training.title} bgColor="bg-bgCardAlt" body={training.description} href="" image={training.image} category={training.category} id={training.id}
+                      onlinePrice={training.price.price_online} offlinePrice={training.price.price_offline} isOnline={training.is_online} date_list={training.date_list}
+                    />
+                  </div>
+                )},)}
+          </div>
+          <div class="self-center">
+            <Pagination 
+              length={totalPage}, 
+              currentUrl={currentUrl}, 
+              currentPage={currPage}, 
+              firstUrl={firstUrl}, 
+              prevUrl={prevUrl}, 
+              nextUrl={nextUrl}, 
+              lastUrl={lastUrl},
+              baseUrl={baseUrl}
+              />
+          </div>
+        </div>
+      </section>
+    </div>
+  </div>
+</Layout>
+<script>
+import { searchParams } from "../../store/HomeStore";
+
+  var inputElement = document.getElementById("searchInput") as HTMLInputElement;
+  var btnElement = document.getElementById("search") as HTMLElement;
+  var inputValue = inputElement?.value;
+
+  function getInputValue(){
+    inputValue = inputElement?.value;
+  }
+
+  inputElement?.addEventListener('input', () => {
+    getInputValue()
+    console.log(inputValue)
+
+    // window.location.href = "/"
+  })
+
+  btnElement?.addEventListener('click', () => {
+    const inputValue = inputElement?.value;
+    searchParams.set(inputValue);
+    const queryParams = new URLSearchParams(window.location.search);
+    queryParams.set('query', inputValue || '');
+    // window.location.search = queryParams.toString();
+  });
+</script>

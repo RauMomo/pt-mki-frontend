@@ -14,9 +14,9 @@ import TrainingList from "./TrainingList.astro";
       <h2>Layanan Kami</h2>
     </div>
     <Tabs client:load/>
-    <TrainingList />
+    <TrainingList/>
     <div class="mr-auto ml-auto">
-      <PrimaryButton title="Lihat Event Lainnya →" primary={false}/>
+      <PrimaryButton client:load title="Lihat Event Lainnya →" primary={false}/>
     </div>
   </div>
 </div>
