@@ -6,12 +6,10 @@
     }
   },
   "framework": "astro",
-  "rewrites": {
-    "fallback": [
+  "rewrites": [
       {
         "source": "/(.*)",
         "destination": "/index.js"
       }
     ]
-  }
 }
