@@ -17,7 +17,7 @@ export const Search: React.FC = () => {
     <div className="flex flex-row flex-1">
       <div className="bg-bgCard p-2 rounded-l-lg">
         <button id="search" onClick={handleClick}>
-          <img src="../../public/icons/icon-search.svg" />
+          <img src="../../icons/icon-search.svg" />
         </button>
       </div>
       <input

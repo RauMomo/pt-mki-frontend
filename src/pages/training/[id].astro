@@ -201,7 +201,7 @@ var outlines = trainingInfo.attributes.outlines.map((value: any) => {
             <div class="text-black">
               <div class="p-6 rounded-t-xl flex flex-row gap-4 flex-shrink min-w-10 items-center">
                 <div class="flex flex-col basis-20">
-                  <img src="../../../public/icons/program/icon-type.png"/>
+                  <img src="../../../icons/program/icon-type.png"/>
                 </div>
                 <div class="flex flex-col gap-2">
                   <subtitle class="text-sm">Tipe Kelas</subtitle>
@@ -210,7 +210,7 @@ var outlines = trainingInfo.attributes.outlines.map((value: any) => {
               </div>
               <div class="p-6 rounded-t-xl flex flex-row gap-4 flex-shrink min-w-10 items-start">
                 <div class="flex flex-col basis-20">
-                  <img src="../../../public/icons/program/icon-date-alt.png"/>
+                  <img src="../../../icons/program/icon-date-alt.png"/>
                 </div>
                 <div class="flex flex-col gap-2">
                   <subtitle class="text-sm">Diselenggarakan Pada</subtitle>
@@ -223,7 +223,7 @@ var outlines = trainingInfo.attributes.outlines.map((value: any) => {
               </div>
               <div class="p-6 rounded-t-xl flex flex-row gap-4 flex-shrink min-w-10 items-start">
                 <div class="flex flex-col basis-20">
-                  <img src="../../../public/icons/program/icon-price.png"/>
+                  <img src="../../../icons/program/icon-price.png"/>
                 </div>
                 <div class="flex flex-col gap-2">
                   <subtitle class="text-sm">Harga / Peserta</subtitle>
@@ -246,7 +246,7 @@ var outlines = trainingInfo.attributes.outlines.map((value: any) => {
                 </div>
               </div>
               <div class="flex flex-auto flex-col gap-4 mt-8">
-                <PrimaryButton client:only="react" title="Download Flyer" primary={false} icon="../../../public/icons/icon-download.png" action={"downloadFile"} params={
+                <PrimaryButton client:only="react" title="Download Flyer" primary={false} icon="../../../icons/icon-download.png" action={"downloadFile"} params={
                   {
                     "url": `${apiConfig.fileBaseUrl}${trainingInfo?.attributes.flyer.data.attributes.url}`,
                     "title": trainingInfo?.attributes.title
@@ -256,7 +256,7 @@ var outlines = trainingInfo.attributes.outlines.map((value: any) => {
                   client:only="react"
                   title="Hubungi Kami"
                   primary={true}
-                  icon="../../../public/icons/icon-message.png"
+                  icon="../../../icons/icon-message.png"
                   action={"contactWhatsapp"}
                   params={
                     {"title": trainingInfo.attributes.title}
