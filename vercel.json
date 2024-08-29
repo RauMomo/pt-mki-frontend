@@ -5,7 +5,11 @@
       "runtime": "nodejs18.x"
     }
   },
+  "framework": "astro",
   "rewrites": [
-    {"source": "/(.*)", "destination": "/"}
-  ]
+      {
+        "source": "/(.*)",
+        "destination": "/index.js"
+      }
+    ]
 }
