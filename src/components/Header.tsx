@@ -6,7 +6,7 @@ const Header = () => {
   return (
     <header className="flex justify-between flex-row items-center w-full h-[90px] border-b-2 shadow-md px-20">
       <a href="/">
-        <img src="../../public/images/logo_mki.png" className="w-20 block" />
+        <img src="../../images/logo_mki.png" className="w-20 block" />
       </a>
       <nav className="inline-block">
         <ul className="flex space-x-4">
