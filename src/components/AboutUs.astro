@@ -3,19 +3,19 @@ import Card from "./Card.astro";
 import Chip from "./Chip.astro";
 ---
 
-<section class="block relative">
-<div class="h-auto w-full py-16 px-16">
+<section class="block relative" id="about-us">
+<div class="h-auto w-full py-16 sm:px-16">
   <div class="flex flex-col relative">
-    <div class="flex flex-row">
+    <div class="flex flex-col sm:flex-row gap-6 sm:gap-0">
       <div class="flex-[40%] gap-10 flex-col flex">
         <Chip></Chip>
-        <h1 class="text-3xl font-semibold">Tentang Kami</h1>
+        <h2 class="font-semibold">Tentang Kami</h2>
       </div>
       <div class="flex-[60%]">
         <p class="text-[1rem] font-extralight tracking-normal leading-8">PT Manajemen Kinerja Indonesia (MKI Consulting) merupakan perusahaan konsultansi dan training yang akan membantu organisasi dalam melakukan transformasi bisnis dengan sukses. Mulai dari menyusun blueprint transformasi organisasi hingga membantu organisasi melaksanakan transformasi organisasi dan mengembangkan pengetahuan, keahlian, sikap, dan perilaku sumber daya manusia yang tepat sebagai kunci sukses utama dari keberhasilan organisasi.</p>
       </div>
     </div>
-    <div class="grid grid-flow-row grid-cols-3 justify-start gap-6 mt-16">
+    <div class="grid grid-flow-row grid-cols-1 sm:grid-cols-3 justify-start gap-6 mt-16">
       <Card title="Visi Kami" body="Menjadi mitra pilihan utama dalam transformasi organisasi." href="" icon="./icons/icon-vision.svg" bgColor="bg-bgComplement"/>
       <Card title="Misi Kami" body="Membantu organisasi bisnis maupun pemerintah dalam melakukan transformasi organisasi dengan solusi yang tepat." href="" icon="./icons/icon-mission.svg" bgColor="bg-bgComplement"/>
       <Card title="Tujuan Kami" body="Dikenal luas sebagai mitra handal transformasi organisasi sebelum 2035.." href="" icon="./icons/icon-goal.svg" bgColor="bg-bgComplement"/>

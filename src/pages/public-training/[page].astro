@@ -1,13 +1,14 @@
 ---
 import type { PaginateFunction } from "astro";
 import Breadcrumb from "../../components/Breadcrumb.astro";
-import Pagination from "../../components/Pagination.astro";
-import TrainingCard from "../../components/TrainingCard.astro";
+import { Search } from "../../components/Search";
 import type { TrainingItem } from "../../components/TrainingList.astro";
 import { apiConfig } from "../../config/api";
 import Layout from "../../layouts/Layout.astro";
+import TrainingCard from "../../components/TrainingCard.astro";
+import Pagination from "../../components/Pagination.astro";
 import { searchParams } from "../../store/HomeStore";
-import { Search } from "../../components/Search";
+import { SearchControl } from "../../components/SearchControl";
 
 const title = 'Public Training'
 
@@ -40,7 +41,7 @@ export async function get({ params }: { params: { page: string, query: string},}
   const localQuery = params.query;
   const searchQuery = localQuery ?? '';
 
-  const extraParams = searchQuery!.length > 0 ? `&filters[title][$contains]=${searchQuery}` : ''
+  const extraParams = !searchQuery!.includes('public-training') ? `&filters[title][$contains]=${searchQuery}` : ''
   const response = await fetch(`${apiConfig.baseUrl}/trainings?populate=image&pagination[page]=${currPage}&pagination[pageSize]=10${extraParams}`, {
     headers: {
       Authorization: `Bearer ${apiConfig.lifetimeToken}`,
@@ -49,7 +50,7 @@ export async function get({ params }: { params: { page: string, query: string},}
     method: 'GET',  
   });
 
-  console.log('response' + response.status )
+  console.log('response' + response.status)
   console.log('responseUrl' + response.url)
 
   const json = await response.json();
@@ -108,6 +109,8 @@ var result = await get({params: {
 
 const allTrainingList: TrainingItem[] = result.props.jsonTrainingList
 
+console.log('params adalah:' + searchParams.get())
+
 const {
   currPage,
   totalPage,
@@ -150,16 +153,33 @@ const customCrumbs = [
             <div class="mr-8">Cari Public Training di sini</div>
             <Search client:load/>
           </div>
-          <div class="grid grid-cols-4 gap-4 grid-rows-1 grid-flow-row">
-              {allTrainingList.map(training => {
-                console.log(training)
-                return (
+          <SearchControl client:only="react" />
+          <div>
+            {allTrainingList.length > 0 ? (
+              <div class="grid grid-cols-4 gap-4 grid-rows-1 grid-flow-row">
+                {allTrainingList.map((training) => (
                   <div class="m-2">
-                    <TrainingCard title={training.title} bgColor="bg-bgCardAlt" body={training.description} href="" image={training.image} category={training.category} id={training.id}
-                      onlinePrice={training.price.price_online} offlinePrice={training.price.price_offline} isOnline={training.is_online} date_list={training.date_list}
+                    <TrainingCard
+                      title={training.title}
+                      bgColor="bg-bgCardAlt"
+                      body={training.description}
+                      href=""
+                      image={training.image}
+                      category={training.category}
+                      id={training.id}
+                      onlinePrice={training.price.price_online}
+                      offlinePrice={training.price.price_offline}
+                      isOnline={training.is_online}
+                      date_list={training.date_list}
                     />
                   </div>
-                )},)}
+                ))}
+              </div>
+            ) : (
+              <div class="text-center mt-8">
+                <p>Tidak ada pelatihan yang tersedia saat ini.</p>
+              </div>
+            )}
           </div>
           <div class="self-center">
             <Pagination 

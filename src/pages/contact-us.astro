@@ -16,8 +16,8 @@ const customCrumbs = [
 ];
 ---
 <Layout title="Contact Us">
-  <div class="flex flex-col flex-1">
-    <div class="bg-bannerOt h-[360px] bg-cover b-gcenter flex items-center">
+  <div class="flex flex-col flex-1 overflow-x-hidden">
+    <div class="bg-bannerOt h-[360px] bg-cover bg-center flex items-center w-full">
       <section>
         <div class="flex flex-col justify-center mt-auto mb-auto gap-8">
           <h2 class="text-white tracking-wide font-normal text-4xl">Contact Us</h2>
@@ -27,7 +27,7 @@ const customCrumbs = [
     </div>
     <div class="bg-white my-8">
       <section>
-        <div class="flex flex-row flex-1 gap-64 basis-full justify-end items-center">
+        <div class="flex sm:flex-row flex-col flex-1 gap-64 basis-full justify-end items-center">
           <div class="w-full flex flex-col gap-8">
             <div>
               <h4>PT Manajemen Kinerja Indonesia</h4>
@@ -51,7 +51,13 @@ const customCrumbs = [
             </div> 
           </div>
           <div class="w-full flex-shrink-1">
-            <iframe src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d9962.160262310113!2d106.807622254973!3d-6.289330460913237!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e69f1fa5b9f59a3%3A0x772f6f7bc1fbc6c0!2sMenara%20165!5e0!3m2!1sen!2sid!4v1724732174196!5m2!1sen!2sid" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+            <div class="relative overflow-hidden pb-[80.25%] md:pb-0 w-full">
+              <iframe
+                src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d9962.160262310113!2d106.807622254973!3d-6.289330460913237!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e69f1fa5b9f59a3%3A0x772f6f7bc1fbc6c0!2sMenara%20165!5e0!3m2!1sen!2sid!4v1724732174196!5m2!1sen!2sid"
+                height="400" width="100%"
+                style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"
+              />
+            </div>
           </div>
         </div>
       </section>

@@ -30,11 +30,12 @@ if(predefinedTrainingLists === undefined || predefinedTrainingLists.length === 0
       },
       method: "GET"
     })
-  var json = await response.json();
+    var json = await response.json();
+    console.log(json)
   var jsonTrainingList = json.data.map((value : any) => {
     var attr = value.attributes
     var imgUrl = attr.image.data.attributes.formats.small.url
-    console.log(imgUrl)
+    // console.log(imgUrl)
     return {
         id: value.id,
         title: attr.title,

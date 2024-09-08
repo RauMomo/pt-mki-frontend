@@ -2,7 +2,7 @@
 import Breadcrumb from "../../components/Breadcrumb.astro";
 import { PrimaryButton } from "../../components/Button.tsx";
 import OtherTrainings from "../../components/OtherTrainings.astro";
-import { apiConfig } from "../../config/api";
+import { apiConfig } from '../../config/api';
 import Layout from "../../layouts/Layout.astro";
 import { formatPrice } from "../../utils/formatPrice";
 
@@ -31,6 +31,7 @@ export async function getStaticPaths() {
 
   return paths
 }
+
 
 const {id} = Astro.params
 
@@ -62,8 +63,8 @@ var urlImage = `http://0.0.0.0:1337${allImages.data.attributes.url}`
 var trainingInfo = training.props.data
 
 var listFacilitators : FacilitatorProfile[] = training.props.data.attributes.profiles.data.map((profile : any) => {
-  var largeImageUrl = `http://0.0.0.0:1337${profile.attributes.image.data.attributes.url}` ?? ''
-  var smallImageUrl = `http://0.0.0.0:1337${profile.attributes.image.data.attributes.formats.small.url}` ?? ''
+  var largeImageUrl = `http://0.0.0.0:1337${profile?.attributes.image.data.attributes.url}` ?? ''
+  var smallImageUrl = `http://0.0.0.0:1337${profile?.attributes.image.data.attributes.formats.small.url}` ?? ''
 
   var facilitator : FacilitatorProfile = {
     description: profile.attributes.description,
@@ -76,7 +77,7 @@ var listFacilitators : FacilitatorProfile[] = training.props.data.attributes.pro
   return facilitator
 })
 
-var outlines = trainingInfo.attributes.outlines.map((value: any) => {
+var outlines = trainingInfo?.attributes.outlines.map((value: any) => {
   return value.outline
 })
 ---
@@ -105,16 +106,17 @@ var outlines = trainingInfo.attributes.outlines.map((value: any) => {
     color: transparent;
   } /* IE fix: removes blue border */
 </style>
+
 <Layout title="Training Info">
   <div class="flex flex-col gap-8">
-    <div class="h-100 bg-bgSecondary w-full flex flex-row flex-auto p-8">
-      <div class="w-3/5 flex flex-col p-16 ml-28">
-        <div class="translate-x-8">
-          <Breadcrumb title={trainingInfo.attributes.title} isArrow={false}/>
+    <div class="h-100 bg-bgSecondary w-auto flex sm:flex-row gap-8 sm:gap-0 flex-col flex-auto p-8 overflow-hidden">
+      <div class="sm:w-3/5 w-full flex flex-col p-16 sm:ml-28 gap-4 md:gap-0">
+        <div class="sm:translate-x-8 ">
+          <Breadcrumb title={trainingInfo?.attributes.title} isArrow={false}/>
         </div>
-        <h1 class="flex-grow flex items-center justify-center p-8">{trainingInfo.attributes.title}</h1>
+        <h2 class="flex-grow flex items-center justify-center sm:p-4 md:p-8  font-normal">{trainingInfo.attributes.title}</h2>
       </div>
-      <div class="w-2/5 flex flex-col justify-center items-center">
+      <div class="sm:w-2/5 flex flex-col justify-center items-center">
           <img
             src={urlImage}
             alt="A description of my image."
@@ -124,24 +126,24 @@ var outlines = trainingInfo.attributes.outlines.map((value: any) => {
       </div>
     </div>
     <section>
-      <div class="flex flex-row">
+      <div class="flex sm:flex-row flex-col gap-8">
         <div class="flex flex-col flex-1 flex-grow">
-          <div class="w-4/5">
+          <div class="sm:w-4/5 w-full">
             <article>
               <h3>Deskripsi Pelatihan</h3>
               <br>
-              <p>{trainingInfo.attributes.description}</p>
+              <p>{trainingInfo?.attributes.description}</p>
             </article>
             <article class="mt-12">
               <h3>Proses Pelatihan dan Sertifikasi</h3>
               <br>
-              <p>{trainingInfo.attributes.explanation}</p>
+              <p>{trainingInfo?.attributes.explanation}</p>
             </article>
             <article class="mt-12 bg-bgLightSkyBlue p-8">
               <h3 class="text-complementary font-normal">Outline Materi</h3>
               <br>
               <div class="px-2">
-                {trainingInfo.attributes.outlines.map((value : any, index: number) => {
+                {trainingInfo?.attributes.outlines.map((value : any, index: number) => {
                   return (
                     <p>{index + 1}. {value.outline}</p>
                   )
@@ -182,20 +184,20 @@ var outlines = trainingInfo.attributes.outlines.map((value: any) => {
                 <div class="flex flex-col gap-3">
                   <h5>Offline + Bimbingan Portofolio Online 1 x</h5>
                   <div class="subtitle-alt">Sudah termasuk PPN, materi pelatihan, goodie bag, sertifikat kepersertaan, dan biaya ujian sertifikasi</div>
-                  <div><span class="font-semibold text-primary text-2xl">{formatPrice(trainingInfo.attributes.price.offline ?? 0)},-</span> /peserta</div>
+                  <div><span class="font-semibold text-primary text-2xl">{formatPrice(trainingInfo?.attributes.price.offline ?? 0)},-</span> /peserta</div>
                 </div>
                 <div class="flex flex-col gap-3">
                   <h5>Online + Bimbingan Portofolio Online 1 x</h5>
                   <div class="subtitle-alt">Sudah termasuk PPN, materi pelatihan, goodie bag, sertifikat kepersertaan, dan biaya ujian sertifikasi</div>
-                  <div><span class="font-semibold text-primary text-2xl">{formatPrice(trainingInfo.attributes.price.online ?? 0 )},-</span> /peserta</div>
+                  <div><span class="font-semibold text-primary text-2xl">{formatPrice(trainingInfo?.attributes.price.online ?? 0 )},-</span> /peserta</div>
                 </div>
               </div>
             </article>
           </div>
           </div>
-          <div class="w-2/5 flex flex-col h-auto mb-auto pb-4 box-border justify-start items-center bg-bgCard text-white text-start rounded-xl">
+          <div class="sm:w-2/5 flex flex-col h-auto mb-auto pb-4 box-border justify-start items-center bg-bgCard text-white text-start rounded-xl">
             <div class="bg-secondary w-full p-6 rounded-t-xl flex flex-col gap-4">
-              <div class="text-sm">{trainingInfo.attributes.category}</div>
+              <div class="text-sm">{trainingInfo?.attributes.category}</div>
               <h5 class="text-2xl">Deskripsi Program</h5>
             </div>
             <div class="text-black">
@@ -214,7 +216,7 @@ var outlines = trainingInfo.attributes.outlines.map((value: any) => {
                 </div>
                 <div class="flex flex-col gap-2">
                   <subtitle class="text-sm">Diselenggarakan Pada</subtitle>
-                  {trainingInfo.attributes.date.all.map((value: any, index: number) => {
+                  {trainingInfo?.attributes.date.all.map((value: any, index: number) => {
                     return (
                       <h4>{value}</h4>
                     )
@@ -232,7 +234,7 @@ var outlines = trainingInfo.attributes.outlines.map((value: any) => {
                       Online:
                     </h5>
                     <h4>
-                      {formatPrice(trainingInfo.attributes.price.online ?? 0)},-
+                      {formatPrice(trainingInfo?.attributes.price.online ?? 0)},-
                     </h4>
                   </div>
                   <div class="block relative">
@@ -240,7 +242,7 @@ var outlines = trainingInfo.attributes.outlines.map((value: any) => {
                       Offline:
                     </h5>
                     <h4>
-                      {formatPrice(trainingInfo.attributes.price.offline ?? 0)},-
+                      {formatPrice(trainingInfo?.attributes.price.offline ?? 0)},-
                     </h4>
                   </div>
                 </div>
@@ -248,7 +250,7 @@ var outlines = trainingInfo.attributes.outlines.map((value: any) => {
               <div class="flex flex-auto flex-col gap-4 mt-8">
                 <PrimaryButton client:only="react" title="Download Flyer" primary={false} icon="../../../icons/icon-download.png" action={"downloadFile"} params={
                   {
-                    "url": `${apiConfig.fileBaseUrl}${trainingInfo?.attributes.flyer.data.attributes.url}`,
+                    "url": `${apiConfig.fileBaseUrl}${trainingInfo?.attributes?.flyer?.data?.attributes?.url}`,
                     "title": trainingInfo?.attributes.title
                   }
                 }/>
@@ -259,7 +261,7 @@ var outlines = trainingInfo.attributes.outlines.map((value: any) => {
                   icon="../../../icons/icon-message.png"
                   action={"contactWhatsapp"}
                   params={
-                    {"title": trainingInfo.attributes.title}
+                    {"title": trainingInfo?.attributes.title}
                   }
                 />
               </div>

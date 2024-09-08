@@ -36,7 +36,7 @@ console.log(urlImage)
           src={urlImage}
           alt="A description of my image."
           style={{ width: '400px', height: '200px', backgroundSize: 'cover' }}
-          class="object-cover rounded-t-xl"
+          class="object-cover rounded-t-xl sm:h-40 md:h-50 h-32"
       />
       <div class="absolute -translate-y-20 left-0 z-10 mt-6">
         <div class="flex flex-row gap-2">
@@ -62,13 +62,13 @@ console.log(urlImage)
       <Chip title={category} bgColor={"bg-bgLightSkyBlue"} textColor={"text-secondary"}/>
     </div>
     <a href=`/training/${id}`>
-      <h2 class="font-normal mt-0 text-black text-left break-words max-w-full h-24 self-center">
+      <h4 class="font-normal mt-0 text-black text-left break-words max-w-full h-auto min-h-16 sm:min-h-20 md:min-h-24 self-center">
         {title}
-      </h2>
+      </h4>
     </a>
     <Divider />
     <div class="mb-4">
-      <subtitle class="text-dimGray text-base font-extralight opacity-70">Diselenggarakan oleh:</subtitle>
+      <subtitle class="text-dimGray text-base font-extralight opacity-70">Diselenggarakan pada:</subtitle>
       {date_list.map((value, index) => {
       return (
         <div class="flex flex-row">
@@ -85,8 +85,8 @@ console.log(urlImage)
     })}  
     </div>
     <div class="flex flex-col gap-2 mt-4">
-      <span class="text-[1.25rem] text-primary"><span class="text-dimGray">Offline:</span> {formatPrice(offlinePrice)},-</span>
-      <span class="text-[1.25rem] text-primary"><span class="text-dimGray">Online:</span> {formatPrice(onlinePrice)},-</span>
+      <span class="text-primary text-[0.95rem] sm:text-[1.1rem] md:text-[1.25rem]"><span class="text-dimGray text-[0.8rem] sm:text-[1rem] md:text-[1.25rem]">Offline:</span> {formatPrice(offlinePrice)},-</span>
+      <span class="text-[0.95rem] sm:text-[1.1rem] md:text-[1.25rem] text-primary"><span class="text-dimGray text-[0.8rem] sm:text-[1rem] md:text-[1.25rem]">Online:</span> {formatPrice(onlinePrice)},-</span>
     </div>
     </div>
   </a>
@@ -98,7 +98,7 @@ console.log(urlImage)
   @tailwind utilities;
 
   .link-card {
-    @apply list-none flex bg-none rounded-lg shadow-inner transition duration-500 ease-out max-w-[350px] min-w-80 break-words flex-wrap whitespace-normal max-h-[100vh] pb-8;
+    @apply list-none flex bg-none rounded-lg shadow-inner transition duration-500 ease-out max-w-[350px] min-w-80 break-words flex-wrap whitespace-normal max-h-[50vh] sm:max-h-[100vh] pb-8;
     background-size: 120%;
     background-position: 100%;
     border-radius: 7px;

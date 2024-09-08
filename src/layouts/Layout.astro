@@ -23,14 +23,14 @@ var theme = {}
   <head>
     <meta charset="UTF-8" />
     <meta name="description" content={description} />
-    <meta name="viewport" content="width=device-width" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta name="generator" content={Astro.generator} />
     <meta property="og:image" content={image} />
     <title>{title}</title>
   </head>
-      <body class="min-h-screen font-sans overflow-scroll">
-        <Header />
+      <body class="min-h-screen font-sans overflow-scroll block mr-0 ml-0">
+        <Header client:load />
         <slot />
         <Footer />
       </body>
@@ -51,44 +51,52 @@ var theme = {}
   }
 
   section {
-    @apply p-12 mx-48
+    @apply p-12 mx-6 sm:mx-48
   }
   
   p{
-    @apply leading-8 tracking-wide text-[16px]
+    @apply leading-8 tracking-wide text-[13px] sm:text-[14px] md:text-[16px]
   }
   html {
     font-family: system-ui, sans-serif;
     background: #ffffff;
     background-size: 224px;
+    width: 100%;
+    overflow-x: hidden;
+    scroll-behavior: smooth;
   }
   h1{
     font-size: 48px;
   }
 
   h2{
-    font-size: 30px;
+    font-size: 24px;
     font-weight: 600;
+    @apply sm:text-[30px] 
   }
 
    h3{
-    font-size: 26px;
+    font-size: 22px;
     font-weight: 600;
+    @apply sm:text-[26px] 
   }
 
   h4{
-    font-size: 22px;
+    font-size: 20px;
     font-weight: 600;
+    @apply sm:text-[22px] 
   }
 
   h5{
-    font-size: 18px;
+    font-size: 16px;
     font-weight: normal;
+    @apply sm:text-[18px] 
   }
 
   h6{
-    font-size: 40px;
+    font-size: 32px;
     font-weight: normal;
+    @apply sm:text-[40px]
   }
 
   address{
@@ -112,7 +120,11 @@ var theme = {}
     @apply text-dimGray text-sm
   }
   .li-spacing{
-    @apply my-6
+    @apply my-2 sm:my-4 md:my-5 underline sm:no-underline
+  }
+
+  .href-alt{
+    @apply underline sm:no-underline
   }
 
   .circle {
@@ -126,4 +138,16 @@ var theme = {}
     height: 128px;
     width: 128px;
   }
+
+  .menu{
+    clear:both;
+    transition: max-height .2s ease-out;
+    @apply sm:clear-none sm:float-right sm:max-h-0 flex-col
+  }
+
+  li{
+    @apply text-left py-1 text-lg
+  }
+
+  
 </style>

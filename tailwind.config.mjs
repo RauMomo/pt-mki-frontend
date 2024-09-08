@@ -14,6 +14,7 @@ export default {
         contact: "url('images/banner-background.png')",
       },
       colors: {
+        chip: "#89CAF5",
         primary: "#335AA7",
         altPrimary: "#4772C7",
         secondary: "#5C47C7",

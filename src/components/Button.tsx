@@ -23,6 +23,11 @@ export var PrimaryButton = ({
     window.open(url, "_blank");
   };
 
+  const contactWhatsappTransform = () => {
+    const url = `https://wa.me/6281381884838?`;
+    window.open(url, "_blank");
+  };
+
   const downloadFile = () => {
     const url = params['url'];
     const title = params['title'];
@@ -43,6 +48,8 @@ export var PrimaryButton = ({
         return downloadFile();
       case "contactWhatsapp":
         return contactWhatsapp();
+      case "contactWhatsappTransform":
+        return contactWhatsappTransform();
       default:
         return console.log("test 3");
     }

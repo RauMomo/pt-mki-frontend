@@ -8,38 +8,40 @@ import { PrimaryButton } from "./Button"
         <h6>Transformasi Bisnis Anda Bersama Kami</h6>
         <p class="text-lg tracking-wide mb-4">Kami hadir untuk mendukung setiap langkah Anda, dari ide hingga implementasi. Mari wujudkan visi besar Anda dengan strategi yang tepat dan dukungan penuh dari tim ahli kami.</p>
         <div class="flex-grow">
-          <PrimaryButton title="Mulai Transformasi Anda" primary={false}/>
+          <PrimaryButton client:load title="Mulai Transformasi Anda" action="contactWhatsappTransform" primary={false}/>
         </div>
       </div>
     </section>
   </div>
-  <div class="bg-bgComplement flex flex-row text-black py-16 h-[430px] justify-center">
-    <section class="flex flex-row justify-center gap-64 items-center">
-    <div class="flex flex-col flex-grow gap-16 w-1/3">
-      <img src="../../images/logo_mki.png" width="200" height="100" />
-      <p class="max-w-2xl ">Perusahaan konsultansi dan training yang akan membantu organisasi dalam melakukan transformasi bisnis dengan sukses</p>
-    </div>
-    <div class="flex flex-col flex-grow w-1/3 justify-start items-center">
-      <h5 class="font-semibold pb-8 text-left -translate-x-8">Menu</h5>
-      <ul>
-        <li class="li-spacing">Home</li>
-        <li class="li-spacing">Tentang Kami</li>
-        <li class="li-spacing">Layanan</li>
-        <li class="li-spacing">Klien</li>
-      </ul>
-    </div>
-    <div class="flex flex-col flex-grow w-1/3 gap-8">
-      <h4 class="font-semibold">Alamat Kantor:</h4>
-      <address>
-        <strong>PT Manajemen Kinerja Indonesia</strong><br>
-        Gedung Menara 165, 4th Floor,<br>
-        Jl. TB Simatupang Kav. 1, Cilandak Timur,<br>
-        Pasar Minggu, Jakarta Selatan
-      </address>
-      <div class="w-auto">
-        <PrimaryButton title="Hubungi Kami" primary={true}/>
+  <div class="bg-bgComplement flex flex-row text-black py-16 h-auto sm:h-[500px] justify-center">
+    <section class="sm:flex sm:flex-row grid grid-cols-1 justify-center gap-14 sm:gap-64 items-center">
+      <div class="flex flex-col flex-grow gap-16 sm:w-1/3 w-full text-center sm:text-left">
+        <img src="../../images/logo_mki.png" width="200" height="100" class="bg-center ml-auto mr-auto sm:m-0"/>
+        <p class="max-w-2xl ">Perusahaan konsultansi dan training yang akan membantu organisasi dalam melakukan transformasi bisnis dengan sukses</p>
       </div>
-    </div>
+      <div class="flex flex-col flex-grow sm:w-1/3 w-full justify-start items-center">
+        <h4 class="font-semibold pb-8 text-left md:-translate-x-8">Menu</h4>
+        <ul class="flex space-x-2 sm:flex sm:flex-col sm:space-x-0">
+          <li class="li-spacing">
+            <a href="#" class="href-alt">Home</a>
+          </li>
+          <li class="li-spacing"><a href="#about-us" class="href-alt">Tentang Kami</a></li>
+          <li class="li-spacing"><a href="#services" class="href-alt">Layanan</a></li>
+          <li class="li-spacing"><a href="#clients" class="href-alt">Klien</a></li>
+        </ul>
+      </div>
+      <div class="flex flex-col flex-grow w-full sm:w-1/3 gap-8 text-center sm:text-left">
+        <h4 class="font-semibold">Alamat Kantor:</h4>
+        <address>
+          <strong>PT Manajemen Kinerja Indonesia</strong><br>
+          Gedung Menara 165, 4th Floor,<br>
+          Jl. TB Simatupang Kav. 1, Cilandak Timur,<br>
+          Pasar Minggu, Jakarta Selatan
+        </address>
+        <div class="w-auto ml-auto mr-auto sm:m-0">
+          <PrimaryButton title="Hubungi Kami" primary={true}/>
+        </div>
+      </div>
     </section>
   </div>
 </footer>

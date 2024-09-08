@@ -19,23 +19,23 @@ await Promise.all<any>(images).then((value) => {
   result = value
 });
 ---
-<section>
+<section id="clients">
   <div class="flex flex-col gap-8 h-full justify-start items-start">
     <Chip title={"Our Customers"} fontSize={14} />
-    <h1>Klien Kami</h1>
+    <h2>Klien Kami</h2>
     <div class="flex flex-row gap-12 items-start">
-      <div class="flex flex-col font-normal text-wrap leading-8 tracking-wide">
+      <div class="flex flex-col font-normal text-wrap leading-1 sm:leading-8 tracking-normal sm:tracking-wide">
         <div class="overflow-auto break-words">
-          <p class="text-dimGray text-[1.2rem] font-light">Dipercaya oleh berbagai perusahaan dari berbagai industri, kami telah membantu ribuan individu mencapai potensi maksimal mereka. Dari startup yang dinamis hingga korporasi mapan, klien kami mengandalkan kami untuk memberikan solusi pelatihan yang efektif dan disesuaikan dengan kebutuhan mereka.</p>
+          <p class="text-dimGray text-[0.8rem] sm:text-[1.2rem] font-light">Dipercaya oleh berbagai perusahaan dari berbagai industri, kami telah membantu ribuan individu mencapai potensi maksimal mereka. Dari startup yang dinamis hingga korporasi mapan, klien kami mengandalkan kami untuk memberikan solusi pelatihan yang efektif dan disesuaikan dengan kebutuhan mereka.</p>
         </div>
-        <div class="max-h-80 grid grid-cols-4 grid-rows-2 justify-center items-center mt-8 gap-16">
+        <div class="sm:min-h-80 min-h-60 grid grid-cols-2 sm:grid-cols-4 grid-rows-2 justify-center items-center mt-8 gap-16">
               <div class="group transition-all">
                 <img
                   src={result[1].src}
                   height="100"
                   width="auto"
                   alt={`Customers Image`}
-                  class="rounded-lg transition-all group-hover:shadow-lg group-hover:opacity-90 object-scale-down"
+                  class="rounded-lg transition-all group-hover:shadow-lg group-hover:opacity-90 object-contain w-full h-full"
                 />
               </div>
               <div class="group transition-all">
@@ -44,7 +44,7 @@ await Promise.all<any>(images).then((value) => {
                   height="100"
                   width="auto"
                   alt={`Customers Image`}
-                  class="rounded-lg transition-all group-hover:shadow-lg group-hover:opacity-90 object-scale-down"
+                  class="rounded-lg transition-all group-hover:shadow-lg group-hover:opacity-90 object-contain w-full h-full"
                 />
               </div>
               <div class="group transition-all">
@@ -53,7 +53,7 @@ await Promise.all<any>(images).then((value) => {
                   height="100"
                   width="auto"
                   alt={`Customers Image`}
-                  class="rounded-lg transition-all group-hover:shadow-lg group-hover:opacity-90 object-scale-down"
+                  class="rounded-lg transition-all group-hover:shadow-lg group-hover:opacity-90 object-contain w-full h-full"
                 />
               </div>
               <div class="group transition-all">
@@ -62,7 +62,7 @@ await Promise.all<any>(images).then((value) => {
                   height="100"
                   width="auto"
                   alt={`Customers Image`}
-                  class="rounded-lg transition-all group-hover:shadow-lg group-hover:opacity-90 object-scale-down"
+                  class="rounded-lg transition-all group-hover:shadow-lg group-hover:opacity-90 object-contain w-full h-full"
                 />
               </div>
               <div class="group transition-all">
@@ -71,7 +71,7 @@ await Promise.all<any>(images).then((value) => {
                   height="100"
                   width="auto"
                   alt={`Customers Image`}
-                  class="rounded-lg transition-all group-hover:shadow-lg group-hover:opacity-90 object-scale-down"
+                  class="rounded-lg transition-all group-hover:shadow-lg group-hover:opacity-90 object-contain w-full h-full"
                 />
               </div>
               <div class="group transition-all">
@@ -80,7 +80,7 @@ await Promise.all<any>(images).then((value) => {
                   height="100"
                   width="auto"
                   alt={`Customers Image`}
-                  class="rounded-lg transition-all group-hover:shadow-lg group-hover:opacity-90 object-scale-down"
+                  class="rounded-lg transition-all group-hover:shadow-lg group-hover:opacity-90 object-contain w-full h-full"
                 />
               </div>
               <div class="group transition-all">
@@ -89,7 +89,7 @@ await Promise.all<any>(images).then((value) => {
                   height="100"
                   width="auto"
                   alt={`Customers Image`}
-                  class="rounded-lg transition-all group-hover:shadow-lg group-hover:opacity-90 object-scale-down"
+                  class="rounded-lg transition-all group-hover:shadow-lg group-hover:opacity-90 object-contain w-full h-full"
                 />
               </div>
               <div class="group transition-all">
@@ -98,7 +98,7 @@ await Promise.all<any>(images).then((value) => {
                   height="100"
                   width="auto"
                   alt={`Customers Image`}
-                  class="rounded-lg transition-all group-hover:shadow-lg group-hover:opacity-90 object-scale-down"
+                  class="rounded-lg transition-all group-hover:shadow-lg group-hover:opacity-90 object-contain w-full h-full"
                 />
               </div>
         </div>
