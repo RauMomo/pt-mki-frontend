@@ -4,7 +4,7 @@ const paginationList = Array.from({length: Number(length)}, (_, i) => i + 1);
 ---
 <style>
 .pagination_button {
-  @apply bg-[#ECF7FD] text-primary px-4 py-2 text-lg rounded-sm;
+  @apply bg-[#ECF7FD] text-primary px-4 py-2 text-lg rounded-lg;
   border: none;
   border-radius: 4px;
   cursor: pointer;
@@ -57,8 +57,8 @@ a{
 
     {nextUrl ? (
         <button class="pagination_button">
-            <a href={nextUrl} class="pagination__link">
-                Next &#x2192;
+            <a href={`/public-training/${nextUrl}`} class="pagination__link">
+                {nextUrl} Next &#x2192;
             </a> 
         </button>
     ) : (

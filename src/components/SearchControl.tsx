@@ -3,6 +3,10 @@ export const SearchControl: React.FC = () => {
   const searchedWord = queryParams.includes("query")
     ? queryParams.substring(queryParams.indexOf("=") + 1, queryParams.length)
     : "";
+  
+  const navigateToPublicTraining = () => {
+    window.location.href = "/public-training/";
+  }
 
   return (
     <div>
@@ -16,7 +20,7 @@ export const SearchControl: React.FC = () => {
               </span>
               <button
                 onClick={() => {
-
+                  navigateToPublicTraining()
                 }}
                 className="text-gray-500 hover:text-gray-800"
                 style={{

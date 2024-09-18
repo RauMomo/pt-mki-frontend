@@ -1,4 +1,5 @@
 ---
+import { apiConfig } from '../config/api';
 import { formatPrice } from '../utils/formatPrice';
 import Chip from './Chip.astro';
 import Divider from './Divider';
@@ -22,47 +23,59 @@ const { href, title, body, bgColor, image, category, onlinePrice, offlinePrice, 
 // const formattedStartDate = fromDate.toLocaleDateString('id-ID', {day: 'numeric', month: 'short'});
 // const formattedEndDate = toDate.toLocaleDateString('id-ID', {day: 'numeric', month: 'short', year: 'numeric'});
 // const timeDifference = getDaysDifference(Date.now())
-const timeDifference = 10
+var sampleDate = date_list[0]
+var fromUntilDate = date_list[0].substring(0, sampleDate.indexOf(' '))
 
-var urlImage = `http://0.0.0.0:1337${image}`
-console.log(urlImage)
+const regex = /^(\d+)-(\d+)$/;
+
+// Execute the regex on the input string
+const match = fromUntilDate.match(regex);
+
+var timeDifference = 1
+if (match) {
+  const number1 = match[1]; // The first captured group (number1)
+  const number2 = match[2];
+
+  timeDifference = parseInt(number2) - parseInt(number1) + 1;
+}
+
+var urlImage = `${apiConfig.fileBaseUrl}${image}`
+console.log('urlImgs' + urlImage)
 ---
 
-<li class=`link-card ${bgColor}`>
-  <div class="flex flex-col relative gap-8">
-    <!-- <div class=`bg-[url(${optimizedBackground.src})]`/> -->
-    <div class="min-h-max">
+<li class=`link-card`>
+  <div class=`flex flex-col relative gap-8 ${bgColor} py-4 max-w-[350px] rounded-xl`>
+    <div class="h-52 rounded-xl">
       <img
           src={urlImage}
-          alt="A description of my image."
-          style={{ width: '400px', height: '200px', backgroundSize: 'cover' }}
-          class="object-cover rounded-t-xl sm:h-40 md:h-50 h-32"
+          alt="Training Description"
+          class="object-cover bg-cover rounded-t-xl sm:h-40 md:h-[240px] h-[320px] object-top relative -translate-y-8 w-[600px]"
       />
-      <div class="absolute -translate-y-20 left-0 z-10 mt-6">
-        <div class="flex flex-row gap-2">
-          <a class="py-2 px-2 rounded-lg relative flex items-center gap-2">
-            <div class="bg-bgComplement rounded-xl text-complementary font-normal px-4 py-0.5 leading-2 flex items-center">
+      <div class="absolute -translate-y-28 md:-translate-y-24 left-0 z-10">
+        <div class="flex flex-row gap-4">
+          <a class="py-4 md:py-2 px-2 rounded-lg relative flex items-center gap-2">
+            <div class="bg-bgComplement rounded-xl text-complementary font-normal px-4 py-1 leading-2 flex items-center">
               {isOnline ? (
                 <p class="mb-1 flex items-center text-sm">
-                  <span class="px-2 py-[8px] rounded-full bg-complementary align-middle mr-1.5"></span>Online
+                  <span class="px-2 py-[8px] rounded-full bg-complementary align-middle mr-1.5 whitespace-pre-wrap md:whitespace-nowrap"></span>Online & Offline
                 </p>
               ) : (
                 <p class="bg-bgSecondary text-secondary text-sm">Offline</p>
               )}
             </div>
-            <div class="bg-bgComplement rounded-xl text-complementary font-normal px-4 py-0.5 text-sm leading-2 flex items-center">
+            <div class="bg-bgComplement rounded-xl text-complementary font-normal px-4 py-1 text-sm leading-2 flex items-center">
               <p class="mb-1 text-sm">{timeDifference} Hari</p>
             </div>
           </a>
         </div>
       </div>
     </div>
-    <div class="flex flex-col px-4 justify-start content-start text-left">
+    <div class="flex flex-col px-4 justify-start items-start text-left">
       <div class="text-left mt-0 -translate-x-4">
       <Chip title={category} bgColor={"bg-bgLightSkyBlue"} textColor={"text-secondary"}/>
     </div>
     <a href=`/training/${id}`>
-      <h4 class="font-normal mt-0 text-black text-left break-words max-w-full h-auto min-h-16 sm:min-h-20 md:min-h-24 self-center">
+      <h4 class="font-normal mt-0 text-black text-left break-words max-w-[90%] h-auto min-h-16 sm:min-h-20 md:min-h-24 self-center overflow-hidden mr-8">
         {title}
       </h4>
     </a>
@@ -98,10 +111,9 @@ console.log(urlImage)
   @tailwind utilities;
 
   .link-card {
-    @apply list-none flex bg-none rounded-lg shadow-inner transition duration-500 ease-out max-w-[350px] min-w-80 break-words flex-wrap whitespace-normal max-h-[50vh] sm:max-h-[100vh] pb-8;
+    @apply list-none flex bg-none rounded-lg shadow-inner transition duration-500 ease-out min-w-16 break-words flex-wrap whitespace-normal min-h-[60vh] sm:min-h-[80vh] m-0;
     background-size: 120%;
     background-position: 100%;
-    border-radius: 7px;
     transition: background-position 0.6s cubic-bezier(0.22, 1, 0.36, 1);
     box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.1);
   }

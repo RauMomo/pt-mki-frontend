@@ -41,6 +41,10 @@ export var PrimaryButton = ({
     document.body.removeChild(link);
   };
 
+  const navigatePublicTraining = () => {
+    window.location.href = "/public-training/"
+  }
+
   const handleAction = (e: any) => {
     console.log(action);
     switch (action) {
@@ -50,6 +54,8 @@ export var PrimaryButton = ({
         return contactWhatsapp();
       case "contactWhatsappTransform":
         return contactWhatsappTransform();
+      case "publicTraining":
+        return navigatePublicTraining();
       default:
         return console.log("test 3");
     }

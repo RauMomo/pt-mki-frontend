@@ -12,7 +12,7 @@ const Header = () => {
   }
 
   return (
-    <header className={`flex flex-col justify-center items-start w-full min-w-screen border-b-2 shadow-md md:px-20 sm:px-10 px-4 gap-8 ${isMenuOpen ? "block h-[300px] overflow-auto" : "h-[90px] overflow-hidden"}`}>
+    <header className={`flex flex-col justify-center items-start w-full min-w-screen border-b-2 shadow-md md:px-20 sm:px-10 px-4 gap-8 ${isMenuOpen ? "block h-[300px] overflow-auto" : "h-[80px] overflow-hidden"}`}>
       <div className="flex flex-row justify-between w-full">
         <div className="w-full">
           <a href="/">
@@ -23,7 +23,7 @@ const Header = () => {
           <ul className="hidden flex-row whitespace-nowrap sm:flex">
             <li>
               <a
-                href="/public-training/1"
+                href="/public-training/"
                 className="text-black no-underline mx-5"
               >
                 Public Training
@@ -88,7 +88,7 @@ const Header = () => {
         <ul className="flex-col space-y-4 justify-start place-items-start w-full text-lg">
           <li>
             <a
-              href="/public-training/1"
+              href="/public-training/"
               className="text-black no-underline text-left"
             >
               Public Training

@@ -7,11 +7,11 @@ export default {
         sans: ["Poppins", "Helvetica", "Arial", "sans-serif"], // Adding Poppins as the main font
       },
       backgroundImage: {
-        logo: "url('images/logo_mki.png')",
-        banner: "url('images/bg_overlay_img.jpeg')",
-        bannerOt: "url('images/banner-our-team.png')",
-        backdrop: "url('images/banner-training-list.png')",
-        contact: "url('images/banner-background.png')",
+        logo: "url('/images/logo_mki.png')",
+        banner: "url('/images/bg_overlay_img.jpeg')",
+        bannerOt: "url('/images/banner-our-team.png')",
+        backdrop: "url('/images/banner-training-list.png')",
+        contact: "url('/images/banner-background.png')",
       },
       colors: {
         chip: "#89CAF5",

@@ -38,8 +38,6 @@ const Tabs : React.FC =  () => {
 
   const tabs = [
     "Public Training",
-    "Learning Services",
-    "Assessment Center",
   ];
 
   var additionalCssStyle = "";

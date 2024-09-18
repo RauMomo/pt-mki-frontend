@@ -3,7 +3,7 @@ import { Breadcrumbs } from "astro-breadcrumbs";
 
 import "astro-breadcrumbs/breadcrumbs.css";
 
-const {title, customCrumbs, isArrow } = Astro.props;
+const {title, customCrumbs, isArrow, isAlt } = Astro.props;
 
 const customBreadcrumb = title !== undefined ? [
   {index: "last", text: `${title}`},
@@ -11,7 +11,7 @@ const customBreadcrumb = title !== undefined ? [
 
 var useArrow = isArrow === null ? false : isArrow === true ? true : false; 
 ---
-<div>
+<div class=`${!isAlt ? 'text-white' : 'text-black'}`>
   <Breadcrumbs customizeLinks={customBreadcrumb} indexText="Beranda" crumbs={customCrumbs} isAlternative={true}>  
     {useArrow ? <svg
       slot="separator"

@@ -6,7 +6,13 @@ export const Search: React.FC = () => {
       "searchInput",
     ) as HTMLInputElement;
     const inputValue = inputElement?.value;
+
+    console.log(inputValue)
     searchParams.set(inputValue)
+
+    var params = searchParams.get();
+    console.log("params:" + params);
+
     const queryParams = new URLSearchParams(window.location.search);
     queryParams.set("query", inputValue || "");
 

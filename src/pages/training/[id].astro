@@ -55,16 +55,16 @@ export async function fetchTraining(params : any ) {
 
 const training = await fetchTraining(id)
 
-const allImages = training.props.data.attributes.image
+const allImages = training.props.data?.attributes.image
 
-var urlImage = `http://0.0.0.0:1337${allImages.data.attributes.url}`
+var urlImage = `${apiConfig.fileBaseUrl}${allImages.data?.attributes.url}`
 
 
 var trainingInfo = training.props.data
 
-var listFacilitators : FacilitatorProfile[] = training.props.data.attributes.profiles.data.map((profile : any) => {
-  var largeImageUrl = `http://0.0.0.0:1337${profile?.attributes.image.data.attributes.url}` ?? ''
-  var smallImageUrl = `http://0.0.0.0:1337${profile?.attributes.image.data.attributes.formats.small.url}` ?? ''
+var listFacilitators : FacilitatorProfile[] = training.props.data?.attributes.profiles.data.map((profile : any) => {
+  var largeImageUrl = `${apiConfig.fileBaseUrl}${profile?.attributes?.image.data.attributes.url}` ?? "../../../icons/icon-default-profile.png"
+  var smallImageUrl = `${apiConfig.fileBaseUrl}${profile?.attributes?.image.data.attributes.formats.small.url}` ?? "../../../icons/icon-default-profile.png"
 
   var facilitator : FacilitatorProfile = {
     description: profile.attributes.description,
@@ -109,14 +109,14 @@ var outlines = trainingInfo?.attributes.outlines.map((value: any) => {
 
 <Layout title="Training Info">
   <div class="flex flex-col gap-8">
-    <div class="h-100 bg-bgSecondary w-auto flex sm:flex-row gap-8 sm:gap-0 flex-col flex-auto p-8 overflow-hidden">
-      <div class="sm:w-3/5 w-full flex flex-col p-16 sm:ml-28 gap-4 md:gap-0">
+    <div class="h-100 bg-bgSecondary w-auto flex sm:flex-row gap-8 sm:gap-0 flex-col flex-auto py-8 overflow-hidden">
+      <div class="sm:w-[55%] w-full flex flex-col py-16 sm:ml-28 gap-4 md:gap-0 px-8 md:px-0">
         <div class="sm:translate-x-8 ">
-          <Breadcrumb title={trainingInfo?.attributes.title} isArrow={false}/>
+          <Breadcrumb title={trainingInfo?.attributes.title} isArrow={false} isAlt={true}/>
         </div>
-        <h2 class="flex-grow flex items-center justify-center sm:p-4 md:p-8  font-normal">{trainingInfo.attributes.title}</h2>
+        <h2 class="flex-grow self-start items-start justify-center pr-8 md:p-8 sm:p-4 font-normal">{trainingInfo.attributes.title}</h2>
       </div>
-      <div class="sm:w-2/5 flex flex-col justify-center items-center">
+      <div class="sm:w-[45%] flex flex-col justify-center items-center mr-16">
           <img
             src={urlImage}
             alt="A description of my image."
@@ -156,12 +156,12 @@ var outlines = trainingInfo?.attributes.outlines.map((value: any) => {
             <article class="mt-12">
               <h3>Fasilitator</h3>
               <br>
-              <div class="flex flex-row gap-16">
+              <div class="md:flex md:flex-row gap-8 grid grid-cols-1">
                 {
                   listFacilitators.map((profile) => {
                     return (
-                      <div class="flex flex-col gap-8">
-                        <a href="https://twitter.com/twcloudchen" class="circle">
+                      <div class="sm:flex sm:flex-col gap-8 grid grid-cols-1 w-full">
+                        <a class="circle">
 	                        <img height="128" width="128" src={profile.image} alt={profile.name}>
                         </a>
                         <div class="relative flex-grow flex flex-col gap-4">
@@ -169,7 +169,6 @@ var outlines = trainingInfo?.attributes.outlines.map((value: any) => {
                             {profile.name}
                           </h4>
                           <subtitle>{profile.role}</subtitle>
-                          <a href="">Preview Profil</a>
                         </div>
                       </div>
                     )
@@ -177,7 +176,7 @@ var outlines = trainingInfo?.attributes.outlines.map((value: any) => {
                 }
               </div>
             </article>
-            <article class="mt-12">
+            <article class="md:mt-20 mt-12">
               <h3>Biaya Investasi</h3>
               <br>
               <div class="flex flex-col gap-8">
