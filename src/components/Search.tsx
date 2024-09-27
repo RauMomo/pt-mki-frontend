@@ -1,4 +1,5 @@
-import { searchParams } from "../store/HomeStore";
+import { textParams } from "../store/HomeStore";
+import { capitalizeFirstletter } from "../utils/capitalizeFirstLetter";
 
 export const Search: React.FC = () => {
   const handleClick = () => {
@@ -6,17 +7,11 @@ export const Search: React.FC = () => {
       "searchInput",
     ) as HTMLInputElement;
     const inputValue = inputElement?.value;
+    textParams.set(inputValue)
 
-    console.log(inputValue)
-    searchParams.set(inputValue)
-
-    var params = searchParams.get();
-    console.log("params:" + params);
-
-    const queryParams = new URLSearchParams(window.location.search);
-    queryParams.set("query", inputValue || "");
-
-    window.location.search = queryParams.toString();
+    const queryParams = new URLSearchParams();
+    queryParams.set("query", capitalizeFirstletter(inputValue) || "");
+    window.location.href = `/public-training?${queryParams}`;
   };
 
   return (
@@ -32,7 +27,7 @@ export const Search: React.FC = () => {
         placeholder="Cari di sini..."
         className="form-control border-dimGray p-2 w-80 rounded-r-lg bg-bgCard focus:outline-none"
       />
-    </div>
+    </div>  
   );
 };
 

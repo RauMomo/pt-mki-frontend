@@ -1,6 +1,6 @@
 ---
 import { apiConfig } from "../config/api";
-import TrainingCard from "./TrainingCard.astro";
+import { TrainingCard } from "./TrainingCard";
 
 export interface TrainingItem {
   id: number,
@@ -17,7 +17,7 @@ export interface TrainingItem {
   }
 }
 
-var {predefinedTrainingLists} = Astro.props;
+var {predefinedTrainingLists, isHomePage} = Astro.props;
 
 var allTrainingList: TrainingItem[] = []
 
@@ -33,7 +33,6 @@ if(predefinedTrainingLists === undefined || predefinedTrainingLists.length === 0
     console.log(json)
   var jsonTrainingList = json.data.map((value : any) => {
     var attr = value.attributes
-    console.log('imgUrl' + JSON.stringify(attr.image.data))
     var imgUrl = attr.image.data.attributes.formats.small.url
     return {
         id: value.id,
@@ -76,10 +75,10 @@ if(predefinedTrainingLists === undefined || predefinedTrainingLists.length === 0
 
 ---
 <div class="flex whitespace-nowrap overflow-x-auto">
-  <div class="flex flex-row gap-4 flex-1">
+  <div class="flex flex-1">
     {allTrainingList.map((training) => {
       return (
-        <div class="min-w-[300px]"> {/* You can adjust the min width as needed */}
+        <div class="min-w-[380px]"> {/* You can adjust the min width as needed */}
           <TrainingCard
             title={training.title}
             bgColor="bg-bgCardAlt"
@@ -92,6 +91,7 @@ if(predefinedTrainingLists === undefined || predefinedTrainingLists.length === 0
             offlinePrice={training.price.price_offline}
             isOnline={training.is_online}
             date_list={training.date_list}
+            isHomePage={isHomePage}
           />
         </div>
       );

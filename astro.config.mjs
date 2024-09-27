@@ -8,7 +8,7 @@ configDotenv();
 
 // https://astro.build/config
 export default defineConfig({
-  // output: "hybrid",
+  output: "hybrid",
   outDir: "./dist",
   // adapter: vercel({
   //   webAnalytics: {

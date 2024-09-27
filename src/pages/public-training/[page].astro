@@ -1,43 +1,49 @@
 ---
-import Breadcrumb from "../components/Breadcrumb.astro";
-import { PublicTrainingComponents } from "../components/PublicTrainingComponents";
-import { Search } from "../components/Search";
-import { SearchControl } from "../components/SearchControl";
-import { apiConfig } from "../config/api";
-import Layout from "../layouts/Layout.astro";
-import { textParams } from '../store/HomeStore.js';
+import type { PaginateFunction } from 'astro';
+import Breadcrumb from '../../components/Breadcrumb.astro';
+import { PublicTrainingComponents } from '../../components/PublicTrainingComponents';
+import { Search } from '../../components/Search';
+import { SearchControl } from '../../components/SearchControl';
+import type { TrainingItem } from '../../components/TrainingList.astro';
+import { apiConfig } from '../../config/api';
+import Layout from '../../layouts/Layout.astro';
+import { textParams } from '../../store/HomeStore';
+
 
 const title = 'Public Training'
-let searchQuery = '';
-// export async function getStaticPaths({ paginate }: { paginate: PaginateFunction }) {
-//   const response = await fetch(`${apiConfig.baseUrl}/trainings?pagination[pageSize]=1`, {
-//     headers: {
-//       Authorization: `Bearer ${apiConfig.lifetimeToken}`,
-//       'Content-Type': 'application/json',
-//     },
-//     method: 'GET',
-//   });
 
-//   const json = await response.json();
+// export const prerender = true;
+
+export async function getStaticPaths({ paginate }: { paginate: PaginateFunction }) {
+  const response = await fetch(`${apiConfig.baseUrl}/trainings?pagination[pageSize]=1`, {
+    headers: {
+      Authorization: `Bearer ${apiConfig.lifetimeToken}`,
+      'Content-Type': 'application/json',
+    },
+    method: 'GET',
+  });
+
+  const json = await response.json();
   
-//   const totalItems = json.meta.pagination.total;
-//   const pageSize = 10;
-//   const totalPages = Math.ceil(totalItems / pageSize);
+  const totalItems = json.meta.pagination.total;
+  const pageSize = 10;
+  const totalPages = Math.ceil(totalItems / pageSize);
 
-//   const paths = Array.from({ length: totalPages }, (_, i) => ({
-//     params: { page: (i + 1).toString(), totalPage: json.meta.pagination.pageCount},
-//   }));
+  const paths = Array.from({ length: totalPages }, (_, i) => ({
+    params: { page: (i + 1).toString(), totalPage: json.meta.pagination.pageCount},
+  }));
 
-//   return paths;
-// }
+  return paths;
+}
 
 export async function get({ params }: { params: { page: string, query: string},}) {
+  const currPage = params.page ? parseInt(params.page, 10) : 1;
   const localQuery = params.query;
   const searchQuery = localQuery ?? '';
 
   const extraParams = searchQuery!.includes('public-training') ? `&filters[title][$contains]=${searchQuery}` : ''
   console.log('extraParams' + extraParams)
-  const response = await fetch(`${apiConfig.baseUrl}/trainings?populate=image&pagination[page]=${1}&pagination[pageSize]=10${extraParams}`, {
+  const response = await fetch(`${apiConfig.baseUrl}/trainings?populate=image&pagination[page]=${currPage}&pagination[pageSize]=10${extraParams}`, {
     headers: {
       Authorization: `Bearer ${apiConfig.lifetimeToken}`,
       'Content-Type': 'application/json',
@@ -45,10 +51,12 @@ export async function get({ params }: { params: { page: string, query: string},}
     method: 'GET',  
   });
 
+  console.log('response' + response.status)
+  console.log('responseUrl' + response.url)
+
   const json = await response.json();
 
   const meta = json.meta
-  const currPage = meta.pagination.page
   const totalPage = meta.pagination.pageCount
   const currentUrl = `${currPage}`
   const prevUrl = currPage - 1 === 0 ? '' : `${currPage - 1}`
@@ -91,16 +99,17 @@ export async function get({ params }: { params: { page: string, query: string},}
   };
 }
 
-// var {page} = Astro.params
-console.log(Astro.params)
+var {page} = Astro.params
 var url = Astro.request.url
+var params = textParams.get()
 
 var result = await get({params: {
-  page: '1' ?? '2',
-  query: searchQuery
+  page: page,
+  query: params
 },})
 
-const allTrainingList = result.props.jsonTrainingList
+const allTrainingList: TrainingItem[] = []
+
 
 const {
   currPage,
@@ -112,6 +121,8 @@ const {
   lastUrl,
   baseUrl
 } = result.props
+
+console.log(result.props)
 
 var searchedText = textParams.get()
 
@@ -144,10 +155,22 @@ const customCrumbs = [
         <div class="flex flex-col flex-1 gap-4">
           <div class="flex flex-row justify-start items-center">
             <div class="mr-8">Cari Public Training di sini</div>
-            <Search client:only="react"/>
+            <Search client:load/>
           </div>
           <SearchControl client:only="react" />
-          <PublicTrainingComponents client:only="react" data={allTrainingList} query={searchedText} page={1}/>
+          <PublicTrainingComponents client:only="react" data={allTrainingList} query={searchedText} page={page}/>
+          <!-- <div class="self-center">
+            <Pagination 
+              length={totalPage}, 
+              currentUrl={currentUrl}, 
+              currentPage={currPage}, 
+              firstUrl={firstUrl}, 
+              prevUrl={prevUrl}, 
+              nextUrl={nextUrl}, 
+              lastUrl={lastUrl},
+              baseUrl={baseUrl}
+              />
+          </div> -->
         </div>
       </section>
     </div>

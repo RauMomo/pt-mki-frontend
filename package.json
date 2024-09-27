@@ -32,6 +32,7 @@
     "react-modal": "^3.16.1",
     "solid-js": "^1.8.18",
     "tailwindcss": "^3.4.4",
+    "tailwindcss-classnames": "^3.1.0",
     "twin.macro": "^3.4.1",
     "typescript": "^5.5.3"
   },

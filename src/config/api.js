@@ -1,12 +1,9 @@
 // src/config/api.js
 
 export const apiConfig = {
-  baseUrl: process.env.BASE_URL,
-  fileBaseUrl: process.env.BASE_FILE_URL,
-  lifetimeToken: process.env.TOKEN,
-  // Add other API-related configurations here if needed
+  baseUrl: import.meta.env?.PUBLIC_BASE_URL,
+  reactBaseUrl: import.meta.env.PUBLIC_REACT_APP_API_URL,
+  reactApiToken: import.meta.env.PUBLIC_REACT_APP_TOKEN,
+  fileBaseUrl: import.meta?.env?.PUBLIC_BASE_FILE_URL,
+  lifetimeToken: import.meta?.env?.PUBLIC_TOKEN,
 };
-
-// Example usage:
-// import { apiConfig } from '../config/api';
-// fetch(`${apiConfig.baseUrl}/endpoint`)

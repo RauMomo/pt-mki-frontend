@@ -5,7 +5,7 @@ export const SearchControl: React.FC = () => {
     : "";
   
   const navigateToPublicTraining = () => {
-    window.location.href = "/public-training/";
+    window.location.href = "/public-training";
   }
 
   return (

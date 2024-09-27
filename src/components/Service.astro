@@ -1,6 +1,6 @@
 ---
 import { PrimaryButton } from "./Button.tsx";
-import Chip from "./Chip.astro";
+import Chip from "./Chip.tsx";
 import Tabs from "./Tabs.tsx";
 import TrainingList from "./TrainingList.astro";
 ---
@@ -14,7 +14,7 @@ import TrainingList from "./TrainingList.astro";
       <h2>Layanan Kami</h2>
     </div>
     <Tabs client:load/>
-    <TrainingList/>
+    <TrainingList isHomePage={true}/>
     <div class="mr-auto ml-auto">
       <PrimaryButton client:load title="Lihat Event Lainnya →" primary={false} action="publicTraining"/>
     </div>

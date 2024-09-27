@@ -23,7 +23,7 @@ const Header = () => {
           <ul className="hidden flex-row whitespace-nowrap sm:flex">
             <li>
               <a
-                href="/public-training/"
+                href="/public-training"
                 className="text-black no-underline mx-5"
               >
                 Public Training
@@ -88,7 +88,7 @@ const Header = () => {
         <ul className="flex-col space-y-4 justify-start place-items-start w-full text-lg">
           <li>
             <a
-              href="/public-training/"
+              href="/public-training"
               className="text-black no-underline text-left"
             >
               Public Training
